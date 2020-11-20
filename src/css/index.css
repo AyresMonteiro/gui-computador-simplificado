@@ -1,0 +1,415 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  background-color: #007EA7;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #9AD1D4;
+  box-shadow: 0px 2px 0.5px black;
+}
+.navbar h4 {
+  content: "";
+  width: calc(100% - 40px);
+  height: 100%;
+}
+.navbar .window-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 30px;
+  padding-right: 5px;
+}
+.navbar .window-buttons button {
+  height: 100%;
+  width: 30%;
+  padding: 5px;
+  margin: 0px 2px;
+  background-color: #003249;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+.navbar .window-buttons button:focus {
+  outline-style: none;
+}
+.navbar .window-buttons #minimize-button:hover {
+  background-color: yellow;
+}
+.navbar .window-buttons #close-button:hover {
+  background-color: red;
+}
+
+.logical-container {
+  width: 100%;
+  max-width: 800px;
+  height: calc(100% - 20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logical-container .data {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.logical-container .data .data-label {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #003249;
+  color: #FAFAFA;
+}
+.logical-container .data .data-label h4 {
+  margin-left: 10px;
+}
+.logical-container .data .data-label button {
+  width: 20%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  margin-right: 20px;
+  cursor: pointer;
+  background-color: #007EA7;
+  color: #FAFAFA;
+  transition: 0.5s;
+}
+.logical-container .data .data-label button:hover {
+  background-color: #FAFAFA;
+  color: #007EA7;
+}
+.logical-container .data .data-label button:focus {
+  outline-style: none;
+}
+.logical-container .data h5 {
+  color: #003249;
+  background-color: #80CED7;
+  padding: 20px;
+  border-radius: 25px;
+  margin: 10px;
+}
+.logical-container .data textarea {
+  width: 575px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  color: #FAFAFA;
+  padding: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #003249;
+}
+.logical-container .data textarea:focus {
+  outline: none;
+}
+.logical-container #commands-list-tab {
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+}
+.logical-container #commands-list-tab .commands-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 100%;
+  background-color: #003249;
+  color: #FAFAFA;
+}
+.logical-container #commands-list-tab .commands-list .command-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 100%;
+}
+.logical-container #commands-list-tab .commands-list .command-list-wrapper .commands-group h4 {
+  padding: 10px;
+  background-color: #002130;
+  cursor: pointer;
+}
+.logical-container #commands-list-tab .commands-list .command-list-wrapper .commands-group .commands-sublist {
+  display: flex;
+  flex-direction: column;
+}
+.logical-container #commands-list-tab .commands-list .command-list-wrapper .commands-group .commands-sublist b {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.logical-container #commands-list-tab .commands-list .command-list-wrapper .commands-group .commands-sublist b:hover {
+  background-color: #FAFAFA;
+  color: #003249;
+}
+.logical-container #commands-list-tab .commands-list button {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 25px;
+  align-self: center;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #9AD1D4;
+  color: #003249;
+  transition: 0.5s;
+}
+.logical-container #commands-list-tab .commands-list button:hover {
+  background-color: #FAFAFA;
+  color: #007EA7;
+}
+.logical-container #commands-list-tab .commands-list button:focus {
+  outline-style: none;
+}
+.logical-container #commands-list-tab .command-info {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 100%;
+  font-weight: bold;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: scroll;
+  background-color: #9AD1D4;
+  color: #003249;
+}
+.logical-container #commands-list-tab .command-info::-webkit-scrollbar {
+  display: none;
+}
+.logical-container #commands-list-tab .command-info div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.logical-container #commands-list-tab .command-info div h2,
+.logical-container #commands-list-tab .command-info div p,
+.logical-container #commands-list-tab .command-info div b {
+  margin: 10px;
+}
+.logical-container #commands-list-tab .command-info div h2 {
+  align-self: center;
+}
+.logical-container #commands-list-tab .command-info div h4 {
+  width: 90%;
+  margin-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-radius: 25px;
+  margin: 5px;
+  background-color: #003249;
+  color: #FAFAFA;
+}
+.logical-container .console-container {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 100%;
+  background-color: #003249;
+  color: #FAFAFA;
+  box-shadow: 2px 0px 0.3px black;
+}
+.logical-container .console-container h4 {
+  padding: 5px;
+}
+.logical-container .console-container #printed-text {
+  margin-left: 5px;
+  overflow: scroll;
+}
+.logical-container .console-container #printed-text::-webkit-scrollbar {
+  display: none;
+}
+.logical-container .wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 81%;
+  max-width: 649px;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.logical-container .wrapper h3 {
+  color: #FAFAFA;
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14pt;
+}
+.logical-container .wrapper .slot-container {
+  width: 100%;
+  max-width: 575px;
+  max-height: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #003249;
+}
+.logical-container .wrapper .slot-container #generated-slots {
+  height: 200px;
+  margin-bottom: 5px;
+  overflow: scroll;
+}
+.logical-container .wrapper .slot-container #generated-slots::-webkit-scrollbar {
+  display: none;
+}
+.logical-container .wrapper .slot-container #generated-slots .line {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 3%;
+}
+.logical-container .wrapper .slot-container #generated-slots .line .slot {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  margin: 0 0.5%;
+  border-radius: 5px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #80CED7;
+  align-items: center;
+}
+.logical-container .wrapper .slot-container #generated-slots .line .slot h5 {
+  text-align: center;
+  padding: 3px;
+}
+.logical-container .wrapper .slot-container #generated-slots .line .slot input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 20px;
+  padding-left: 5px;
+  background-color: #007EA7;
+  color: #FAFAFA;
+  transition: 0.5s;
+}
+.logical-container .wrapper .slot-container #generated-slots .line .slot input:focus {
+  outline-style: none;
+  background-color: #80CED7;
+  color: #003249;
+}
+.logical-container .wrapper .slot-bottom-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.logical-container .wrapper .slot-bottom-wrapper button {
+  width: 20%;
+  padding: 10px;
+  border-radius: 20px;
+  align-self: center;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #007EA7;
+  color: #FAFAFA;
+  transition: 0.5s;
+}
+.logical-container .wrapper .slot-bottom-wrapper button:hover {
+  background-color: #FAFAFA;
+  color: #007EA7;
+}
+.logical-container .wrapper .slot-bottom-wrapper button:focus {
+  outline-style: none;
+}
+.logical-container .wrapper .slot-bottom-wrapper #clear-button {
+  width: 10%;
+  padding: 5px;
+}
+.logical-container .wrapper .slot-bottom-wrapper .file-controller, .logical-container .wrapper .slot-bottom-wrapper .flow-controller {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  width: 12.5%;
+  height: 100%;
+  justify-content: center;
+}
+.logical-container .wrapper .slot-bottom-wrapper .file-controller button, .logical-container .wrapper .slot-bottom-wrapper .flow-controller button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  width: 100%;
+}
+.logical-container .wrapper .slot-bottom-wrapper .slots-controller {
+  display: flex;
+  flex-direction: column;
+  width: 22%;
+  color: #FAFAFA;
+  align-items: center;
+  justify-content: space-between;
+}
+.logical-container .wrapper .slot-bottom-wrapper .slots-controller .controller-line {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.logical-container .wrapper .slot-bottom-wrapper .slots-controller .controller-line input {
+  width: 20%;
+  border: 0;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: #007EA7;
+  color: #FAFAFA;
+}
+.logical-container .wrapper .slot-bottom-wrapper .slots-controller .controller-line input:focus {
+  outline-style: none;
+}
+.logical-container .wrapper .slot-bottom-wrapper .slots-controller .controller-line:last-child {
+  margin-bottom: 0;
+}
+.logical-container .wrapper .error-console {
+  width: 100%;
+  height: 30%;
+  align-self: flex-end;
+  background-color: #003249;
+  color: #FAFAFA;
+  box-shadow: 0px -2px 0.3px black;
+}
+.logical-container .wrapper .error-console h4 {
+  padding: 5px;
+}
+.logical-container .wrapper .error-console #errors {
+  margin-left: 5px;
+  max-height: 80%;
+  overflow: scroll;
+}
+.logical-container .wrapper .error-console #errors::-webkit-scrollbar {
+  display: none;
+}
+
+/*# sourceMappingURL=index.css.map */
