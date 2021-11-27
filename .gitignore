@@ -2,3 +2,4 @@ node_modules
 *.txt
 src/css/*.map
 dist
+windows-installer

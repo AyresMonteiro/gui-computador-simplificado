@@ -1,6 +1,6 @@
 {
   "name": "gui-computador-simplificado-electron",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Uma interface gráfica para exercícios de Computador Simplificado (CS).",
   "main": "main.js",
   "author": {
@@ -9,14 +9,16 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build-windows": "electron-packager . \"Computador Simplificado - GUI\" --platform=win32 --arch=x64 --icon=./src/assets/icon.ico --out=dist",
+    "generate-windows-installer": "electron-installer-windows --src dist --dest windows-installer/"
   },
   "homepage": "https://github.com/AyresMonteiro/gui-computador-simplificado-electron",
   "repository": "https://github.com/AyresMonteiro/gui-computador-simplificado-electron",
   "build": {
     "appId": "com.electron.simpleCompGUI",
     "productName": "Computador Simplificado - GUI",
-    "copyright": "Copyright © 2020 Ayres Monteiro",
+    "copyright": "Copyright © 2021 Ayres Monteiro",
     "directories": {
       "app": ".",
       "buildResources": "build",
@@ -29,9 +31,9 @@
   "devDependencies": {
     "electron": "^11.0.2",
     "electron-builder": "^22.9.1",
+    "electron-installer-windows": "^3.0.0",
     "electron-packager": "^15.1.0",
     "electron-reload": "^1.5.0",
-    "electron-wix-msi": "^3.0.4",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "prettier": "2.1.2"
