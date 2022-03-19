@@ -17,7 +17,7 @@
   "build": {
     "appId": "com.electron.simpleCompGUI",
     "productName": "Computador Simplificado - GUI",
-    "copyright": "Copyright © 2020 Ayres Monteiro",
+    "copyright": "Copyright © 2022 Ayres Monteiro",
     "directories": {
       "app": ".",
       "buildResources": "build",
