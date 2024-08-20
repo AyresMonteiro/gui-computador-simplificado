@@ -1,166 +1,117 @@
-const showError = require("./showError.js");
+import { CommandRuntime } from './CommandRuntime.js'
+import { DataIterator } from './DataIterator.js'
+import { numberToSlotId, showError as showErrorBase } from './utils.js'
+import { SlotIterator } from './SlotIterator.js'
 
-const IMP = require("./runFunctions/print.js");
-const COP = require("./runFunctions/copy.js");
-const SOM = require("./runFunctions/sum.js");
-const SUB = require("./runFunctions/subtract.js");
-const MUL = require("./runFunctions/multiply.js");
-const DIV = require("./runFunctions/divide.js");
+import { backCommandFactory } from './commands/back.js'
+import { copyCommand } from './commands/copy.js'
+import { divideCommand } from './commands/divide.js'
+import { ifCommandFactory } from './commands/if.js'
+import { multiplyCommand } from './commands/multiply.js'
+import { printCommand } from './commands/print.js'
+import { readCommandFactory } from './commands/read.js'
+import { stopCommandFactory } from './commands/stop.js'
+import { subtractCommand } from './commands/subtract.js'
+import { sumCommand } from './commands/sum.js'
 
-let dataIndex = 0;
-let i = 1;
+export const showError = showErrorBase;
 
-function sleep(ms) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
+const runtimeFactory = (numberOfSlots, data) => {
+  const mainIterator = new SlotIterator(numberOfSlots)
+  const dataIterator = new DataIterator(data)
+
+  const commandRuntime = CommandRuntime.getInstance()
+
+  commandRuntime.appendCommand(backCommandFactory(mainIterator))
+  commandRuntime.appendCommand(copyCommand)
+  commandRuntime.appendCommand(divideCommand)
+  commandRuntime.appendCommand(ifCommandFactory(mainIterator))
+  commandRuntime.appendCommand(multiplyCommand)
+  commandRuntime.appendCommand(printCommand)
+  commandRuntime.appendCommand(readCommandFactory(dataIterator))
+  commandRuntime.appendCommand(stopCommandFactory(mainIterator))
+  commandRuntime.appendCommand(subtractCommand)
+  commandRuntime.appendCommand(sumCommand)
+
+  return { mainIterator, commandRuntime, dataIterator }
 }
 
-const functions = {
-  VT: function (args = Array, id = String, infoObject = {}) {
-    try {
-      if (args.length === 1) {
-        let slot = parseInt(args[0].substr(1), 10);
-        if (slot <= infoObject.numberOfSlots && slot > 0) {
-          i = slot - 1;
-        } else {
-          throw `E${id}: Escaninho ${args[0]} inválido.`;
-        }
-      } else {
-        return 0;
-      }
-      return 1;
-    } catch (err) {
-      showError(err);
-      return 0;
-    }
-  },
-  SUB,
-  SOM,
-  SE: function (args = Array, id = String, infoObject = {}) {
-    try {
-      if (args.length === 4) {
-        let firstSlot = parseInt(args[0].substr(1), 10);
-        // eslint-disable-next-line prefer-destructuring
-        let operation = args[1];
-        let secondSlot = parseInt(args[2].substr(1), 10);
-        let destinySlot = parseInt(args[3].substr(1), 10);
-        if (
-          firstSlot <= infoObject.numberOfSlots &&
-          firstSlot > 0 &&
-          secondSlot <= infoObject.numberOfSlots &&
-          secondSlot > 0 &&
-          destinySlot <= infoObject.numberOfSlots &&
-          destinySlot > 0 &&
-          (operation === ">" || operation === "<" || operation === "=")
-        ) {
-          firstSlot = parseInt(document.getElementById(args[0]).value, 10);
-          secondSlot = parseInt(document.getElementById(args[2]).value, 10);
-          if (
-            // eslint-disable-next-line no-extra-parens
-            (operation === ">" && firstSlot > secondSlot) ||
-            // eslint-disable-next-line no-extra-parens
-            (operation === "<" && firstSlot < secondSlot) ||
-            // eslint-disable-next-line no-extra-parens
-            (operation === "=" && firstSlot === secondSlot)
-          ) {
-            i = destinySlot - 1;
-          }
-        } else {
-          throw (
-            `E${id}: Escaninhos ${args[0]}, ${args[2]} ou ${args[3]}` +
-            ` inválidos ou operador ${args[1]} inválido.`
-          );
-        }
-      } else {
-        return 0;
-      }
-      return 1;
-    } catch (err) {
-      showError(err);
-      return 0;
-    }
-  },
-  PGC: function (args = Array, id = String, infoObject = {}) {
-    try {
-      if (args.length === 1) {
-        let slot = parseInt(args[0].substr(1), 10);
-        if (slot <= infoObject.numberOfSlots && slot > 0) {
-          slot = document.getElementById(args[0]);
-          if (dataIndex < infoObject.data.length) {
-            slot.value = infoObject.data[dataIndex];
-            dataIndex = dataIndex + 1;
-          } else {
-            throw `E${id}: Não há mais cartões!`;
-          }
-        } else {
-          throw `E${id}: Escaninho "${args[0]}" inválido`;
-        }
-      } else {
-        return 0;
-      }
-      return 1;
-    } catch (err) {
-      showError(err);
-      return 0;
-    }
-  },
-  MUL,
-  IMP,
-  DIV,
-  COP
-};
+let lastSlotsNumber = 0
+let lastStringifiedData = ''
+let lastIteratorInstance = null
+let lastDataIteratorInstance = null
+let generatedRuntimeData = null
 
-async function run(numberOfSlots, data, speed) {
-  let text = document.getElementById("printed-text");
-  let errors = document.getElementById("errors");
-  text.innerHTML = "";
-  errors.innerHTML = "";
+const memoizedRuntimeFactory = (numberOfSlots, data) => {
+  if (
+    lastStringifiedData === JSON.stringify(data) &&
+    lastSlotsNumber === numberOfSlots &&
+    generatedRuntimeData
+  ) {
+    return generatedRuntimeData
+  }
 
-  dataIndex = 0;
+  const runtimeData = runtimeFactory(numberOfSlots, data)
 
-  const infoObject = {
+  lastSlotsNumber = numberOfSlots
+  lastStringifiedData = JSON.stringify(data)
+  generatedRuntimeData = runtimeData
+  lastIteratorInstance = runtimeData.mainIterator
+  lastDataIteratorInstance = runtimeData.dataIterator
+
+  return runtimeData
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}
+
+export async function run(numberOfSlots, data, speed) {
+  let text = document.getElementById('printed-text')
+  let errors = document.getElementById('errors')
+  text.innerHTML = ''
+  errors.innerHTML = ''
+
+  const { mainIterator, commandRuntime } = memoizedRuntimeFactory(
     numberOfSlots,
     data
-  };
+  )
 
-  for (i = 1; i <= numberOfSlots; i++) {
-    let slotId = `E${i > 9 ? i : `0${i}`}`;
-    let slot = document.getElementById(slotId);
-    slot.focus();
+  for (let slot of mainIterator) {
+    const slotId = numberToSlotId(slot)
+    const slotElement = document.getElementById(slotId)
 
-    let { value } = slot;
+    slotElement.focus()
+
+    let { value } = slotElement
 
     if (!value) {
-      showError(`E${i}: Escaninho em branco! Use o comando PARE.`);
-      break;
+      showError(`E${slot}: Escaninho em branco! Use o comando PARE.`)
+      break
     }
 
-    value = value.toUpperCase();
+    value = value.toUpperCase()
 
-    let [fn, ...args] = value.split(" ");
+    let [acronym, ...args] = value.trim().split(' ')
 
-    if (fn === "PARE") break;
-
-    if (functions[fn]) {
-      if (!functions[fn](args, i, infoObject)) {
-        showError(`E${i}: Erro de sintaxe!`);
-      }
-    } else {
-      showError(`E${i}: O comando ${fn} não existe!`);
+    try {
+      commandRuntime.executeCommand(acronym, ...args)
+    } catch (err) {
+      showError(`E${slot}: ${err}`)
     }
 
     // eslint-disable-next-line no-await-in-loop
-    await sleep(speed * 1000);
+    await sleep(speed * 1000)
   }
 }
 
-function stop(numberOfSlots) {
-  i = numberOfSlots;
+export const stop = () => {
+  lastIteratorInstance?.stop()
 }
 
-module.exports = {
-  stop,
-  showError,
-  run
-};
+export const reset = () => {
+  lastIteratorInstance?.reset()
+  lastDataIteratorInstance?.reset()
+}

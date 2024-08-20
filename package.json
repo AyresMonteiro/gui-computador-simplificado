@@ -9,9 +9,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "electron .",
-    "build-windows": "electron-packager . \"Computador Simplificado - GUI\" --platform=win32 --arch=x64 --icon=./src/assets/icon.ico --out=dist",
-    "generate-windows-installer": "electron-installer-windows --src dist --dest windows-installer/"
+    "start": "node index.js"
   },
   "homepage": "https://github.com/AyresMonteiro/gui-computador-simplificado-electron",
   "repository": "https://github.com/AyresMonteiro/gui-computador-simplificado-electron",
@@ -28,14 +26,7 @@
       "icon": "./src/assets/icon.ico"
     }
   },
-  "devDependencies": {
-    "electron": "^11.0.2",
-    "electron-builder": "^22.9.1",
-    "electron-installer-windows": "^3.0.0",
-    "electron-packager": "^15.1.0",
-    "electron-reload": "^1.5.0",
-    "eslint": "^7.12.1",
-    "eslint-config-prettier": "^6.15.0",
-    "prettier": "2.1.2"
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }

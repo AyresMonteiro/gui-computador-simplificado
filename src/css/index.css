@@ -6,7 +6,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: #007EA7;
 }
@@ -56,7 +56,6 @@ body {
 
 .logical-container {
   width: 100%;
-  max-width: 800px;
   height: calc(100% - 20px);
   display: flex;
   justify-content: space-between;
@@ -230,7 +229,7 @@ body {
 .logical-container .console-container {
   display: flex;
   flex-direction: column;
-  width: 150px;
+  width: 40%;
   height: 100%;
   background-color: #003249;
   color: #FAFAFA;
@@ -249,8 +248,7 @@ body {
 .logical-container .wrapper {
   display: flex;
   flex-direction: column;
-  width: 81%;
-  max-width: 649px;
+  width: 60%;
   height: 100%;
   align-items: center;
   justify-content: space-between;
