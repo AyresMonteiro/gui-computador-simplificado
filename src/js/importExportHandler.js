@@ -1,87 +1,64 @@
-// import fs from "fs"
+import { exportAlgorithmToString, importAlgorithmFromString, resizeSlots } from './flow.js'
+import { showError } from './utils.js'
 
-// import { clearSlots } from "./slots"
-// import { showError } from "./utils"
+export async function importCode() {
+  const fileInput = document.createElement('input')
 
-// async function importCode(numberOfSlots) {
-//   try {
-//     const path = await dialog.showOpenDialog({
-//       title: "Escolha o arquivo de importação:",
-//       properties: ["openFile"],
-//       filters: [
-//         {
-//           name: "Códigos",
-//           extensions: ["txt"]
-//         }
-//       ]
-//     });
+  fileInput.type = 'file'
+  fileInput.accept = '.txt'
 
-//     if (path.filePaths.length !== 1)
-//       throw "ERRO: Escolha um arquivo para importar!";
+  fileInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0]
 
-//     // eslint-disable-next-line no-sync
-//     let data = fs.readFileSync(path.filePaths[0], { encoding: "utf-8" });
+    if (!file) {
+      return
+    }
 
-//     data = data.split("\n");
-//     data = data.filter(item => item);
+    const reader = new FileReader()
 
-//     clearSlots(numberOfSlots);
+    reader.onload = async (e) => {
+      const algorithm = e.target.result
 
-//     data.forEach(command => {
-//       const info = command.split(":");
-//       if (info.length !== 2) return false;
-//       let id = parseInt(info[0].substr(1), 10);
+      const lines = algorithm
+        .split('\n')
+        .map((line) => line.trim())
+        .filter(Boolean)
 
-//       if (id <= numberOfSlots && id > 0) {
-//         id = `E${id < 10 ? "0" : ""}${id}`;
+      const slotsInputElement = document.getElementById('slots-input')
 
-//         const slot = document.getElementById(id);
+      if (!slotsInputElement) {
+        showError('Erro de Importação: Input de Slots não encontrado!')
+      }
 
-//         slot.value = info[1].trim();
-//       }
+      slotsInputElement.value = lines.length
+      resizeSlots(lines.length)
 
-//       return 0;
-//     });
-//   } catch (err) {
-//     showError(err);
-//   }
-// }
+      importAlgorithmFromString(lines)
+    }
 
-// async function exportCode(numberOfSlots) {
-//   try {
-//     let code = "";
-//     for (let i = 1; i <= numberOfSlots; i++) {
-//       const id = `E${i < 10 ? "0" : ""}${i}`;
-//       const slot = document.getElementById(id);
-//       if (slot.value) code = code + id + ": " + slot.value + "\n";
-//     }
+    reader.readAsText(file)
+  })
 
-//     const path = await dialog.showSaveDialog({
-//       title: "Salvar como:",
-//       properties: [
-//         "createDirectory",
-//         "showOverwriteConfirmation",
-//         "dontAddToRecent"
-//       ],
-//       filters: [
-//         {
-//           name: "Códigos",
-//           extensions: ["txt"]
-//         }
-//       ]
-//     });
+  fileInput.click()
+}
 
-//     if (!path.filePath)
-//       throw "ERRO: Escolha um nome de arquivo para salvar o código!";
+export async function exportCode(numberOfSlots) {
+  try {
+    const algorithm = exportAlgorithmToString(numberOfSlots).join('\n')
 
-//     // eslint-disable-next-line no-sync
-//     fs.writeFileSync(path.filePath, code);
-//   } catch (err) {
-//     showError(err);
-//   }
-// }
+    const blob = new Blob([algorithm], { type: 'text/plain' })
 
-// module.exports = {
-//   importCode,
-//   exportCode
-// };
+    const timestamp = new Date().toISOString().replaceAll(/[^\d]/g, '')
+
+    const filename = `cs_algorithm_${timestamp}.txt`
+
+    const a = document.createElement('a')
+
+    a.download = filename
+    a.href = URL.createObjectURL(blob)
+    a.click()
+  } catch (e) {
+    showError('Erro de Exportação: ${e.message}')
+    return
+  }
+}

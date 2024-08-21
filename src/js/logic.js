@@ -1,7 +1,6 @@
-import { LayoutManager } from './LayoutManager.js'
-import { run, stop, reset, clear } from './flow.js'
+import { run, stop, reset, clear, resizeSlots } from './flow.js'
 import { loadInfoData } from './generateInfo.js'
-// import { importCode, exportCode } from './importExportHandler.js'
+import { importCode, exportCode } from './importExportHandler.js'
 import {
   openInfo,
   openDataInput,
@@ -21,12 +20,27 @@ let isDataLoaded = false
 
 $('#slots-input').addEventListener('change', (e) => {
   numberOfSlots = parseInt(e.target.value, 10)
-  new LayoutManager().generateLayout(numberOfSlots)
+  resizeSlots(numberOfSlots)
 })
 
 $('#speed-input').addEventListener('change', (e) => {
-  speed = e.target.value.replace(/[^0-9,.]*/gu, '').replace(',', '.')
-  speed = parseFloat(speed)
+  const timeUnits = new Map()
+
+  timeUnits.set('ms', 0.001)
+  timeUnits.set('m', 60)
+  timeUnits.set('s', 1)
+
+  const timeUnitsRegex = /(ms|m|s)/gu
+
+  const rawValue = String(e.target.value)
+
+  const firstUnitMatch = rawValue.match(timeUnitsRegex).shift()
+
+  const numericValue = parseFloat(
+    rawValue.replaceAll(timeUnitsRegex, '').replace(',', '.')
+  )
+
+  speed = numericValue * timeUnits.get(firstUnitMatch)
 })
 
 $('#run-button').addEventListener('click', () => {
@@ -42,13 +56,13 @@ $('#clear-button').addEventListener('click', () => {
   clear(numberOfSlots)
 })
 
-// $('#import-button').addEventListener('click', () => {
-//   importCode(numberOfSlots)
-// })
+$('#import-button').addEventListener('click', () => {
+  importCode(numberOfSlots)
+})
 
-// $('#export-button').addEventListener('click', () => {
-//   exportCode(numberOfSlots)
-// })
+$('#export-button').addEventListener('click', () => {
+  exportCode(numberOfSlots)
+})
 
 $('#open-data-button').addEventListener('click', openDataInput)
 $('#close-data-button').addEventListener('click', closeDataInput)
@@ -93,4 +107,4 @@ Array.from($('#flow-commands').children).forEach((element) => {
   })
 })
 
-new LayoutManager().generateLayout(numberOfSlots)
+resizeSlots(numberOfSlots)

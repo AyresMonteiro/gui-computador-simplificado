@@ -20,7 +20,10 @@ export function loadInfoData() {
           </b>
           ${command.methods.map((method) => `<h4>${method}</h4>`).join('\n')}
           <p>
-          ${command.methodsDesc.replaceAll('\n', '<br />')}
+          ${
+            command.methodsDesc.replaceAll('\n', '<br />').trim() +
+            '<br /><br /><br />'
+          }
           </p>
         </div>
       `.trim()

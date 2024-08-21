@@ -4,6 +4,7 @@ import { numberToSlotId, showError as showErrorBase } from './utils.js'
 import { SlotIterator } from './SlotIterator.js'
 
 import { defaultFactories } from './commands/index.js'
+import { LayoutManager } from './LayoutManager.js'
 
 export const showError = showErrorBase
 
@@ -109,6 +110,59 @@ export const clear = (numberOfSlots) => {
   }
 }
 
+/**
+ * Import algorithm from a string array.
+ *
+ * @param {string[]} algorithm - Algorithm to import.
+ */
+export const importAlgorithmFromString = (algorithm) => {
+  const numberOfSlots = algorithm.length
+
+  const slotIterator = new SlotIterator(numberOfSlots)
+
+  clear(numberOfSlots)
+
+  for (const slot of slotIterator) {
+    const [slotId, ...rest] = algorithm
+      .shift()
+      .split(':')
+      .map((item) => item.trim())
+
+    const slotElement = document.getElementById(slotId)
+
+    if (!slotElement) {
+      showError(`Erro de Importação: Slot ${slotId} não encontrado!`)
+      continue
+    }
+
+    slotElement.value = rest.join(':')
+  }
+}
+
+/**
+ * Export current slots algorithm to a string.
+ *
+ * @param {number} numberOfSlots
+ * @returns {string[]}
+ */
+export const exportAlgorithmToString = (numberOfSlots) => {
+  const slotIterator = new SlotIterator(numberOfSlots)
+
+  /**
+   * @type {string[]}
+   */
+  const algorithm = []
+
+  for (const slot of slotIterator) {
+    const slotId = numberToSlotId(slot)
+    const slotElement = document.getElementById(slotId)
+
+    algorithm.push(`${slotId}: ${slotElement.value ?? ''}`)
+  }
+
+  return algorithm
+}
+
 export const stop = () => {
   lastIteratorInstance?.stop()
 }
@@ -116,4 +170,10 @@ export const stop = () => {
 export const reset = () => {
   lastIteratorInstance?.reset()
   lastInputIteratorInstance?.reset()
+}
+
+export const resizeSlots = (numberOfSlots) => {
+  const layoutManager = new LayoutManager()
+
+  layoutManager.generateLayout(numberOfSlots)
 }
