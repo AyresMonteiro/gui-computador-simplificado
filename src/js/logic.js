@@ -1,5 +1,5 @@
 import { LayoutManager } from './LayoutManager.js'
-import { run, stop, reset } from './flow.js'
+import { run, stop, reset, clear } from './flow.js'
 import { loadInfoData } from './generateInfo.js'
 // import { importCode, exportCode } from './importExportHandler.js'
 import {
@@ -39,7 +39,7 @@ $('#stop-button').addEventListener('click', () => {
 })
 
 $('#clear-button').addEventListener('click', () => {
-  clearSlots(numberOfSlots)
+  clear(numberOfSlots)
 })
 
 // $('#import-button').addEventListener('click', () => {
@@ -54,7 +54,10 @@ $('#open-data-button').addEventListener('click', openDataInput)
 $('#close-data-button').addEventListener('click', closeDataInput)
 
 $('#data-values').addEventListener('change', (e) => {
-  data = e.target.value.replace(/[^0-9,]*/gu, '').split(',').map(Number)
+  data = e.target.value
+    .replace(/[^0-9,]*/gu, '')
+    .split(',')
+    .map(Number)
 })
 
 $('#open-commands-list-button').addEventListener('click', () => {

@@ -1,22 +1,33 @@
-import { commands } from '../data/commands'
+import { defaultFactories } from './commands/index.js'
 
 export function loadInfoData() {
   const commandsContainer = document.querySelector('#commands-info-container')
 
-  const data = Object.keys(commands)
-    .map(
-      (command) => `<div id="${command}">\n
-  <h2>${commands[command].title}</h2>\n<p>${commands[command].desc}</p>\n
-  <b>${
-    commands[command].methods.length === 1 ? 'Método' : 'Métodos'
-  } de uso:</b>\n
-  ${commands[command].methods
-    .map((method) => `<h4>${method}</h4>\n`)
-    .join('\n')}
-  <p>${commands[command].methodsDesc}</p></div>`
+  const generatedHtml = defaultFactories
+    .map((Factory) => ({
+      acronym: Factory.commandAcronym,
+      desc: Factory.commandDescription,
+      methods: Factory.commandUsage,
+      methodsDesc: Factory.commandUsageDescription,
+    }))
+    .map((command) =>
+      `
+        <div id="${command.acronym.toLocaleLowerCase()}-info">
+          <h2>${command.acronym}</h2>
+          <p>${command.desc}</p>
+          <b>
+            ${command.methods.length === 1 ? 'Método' : 'Métodos'} de uso:
+          </b>
+          ${command.methods.map((method) => `<h4>${method}</h4>`).join('\n')}
+          <p>
+          ${command.methodsDesc.replaceAll('\n', '<br />')}
+          </p>
+        </div>
+      `.trim()
     )
     .join('\n')
+    .trim()
 
   commandsContainer.innerHTML = ''
-  commandsContainer.innerHTML = data
+  commandsContainer.innerHTML = generatedHtml
 }

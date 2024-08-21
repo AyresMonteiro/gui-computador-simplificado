@@ -1,49 +1,68 @@
 import { Command } from '../Command.js'
-import { getIndexFromSlotString, showError } from '../utils.js'
+import { CommandFactory } from '../CommandFactory.js'
+import { InputIterator } from '../InputIterator.js'
+import { SlotIterator } from '../SlotIterator.js'
+import { numberToSlotId, showError } from '../utils.js'
 
-const readBaseBehavior =
-  (dataIterator) =>
-  (...args) => {
-    const id = getIndexFromSlotString(args[0])
+export class ReadCommandFactory extends CommandFactory {
+  static commandAcronym = 'PGC'
+  static commandGroup = 'data'
+  static commandDescription =
+    'Lê o próximo valor inserido pelo usuário. (Dados de entrada)'
+  static commandUsage = ['PGC Ex']
+  static commandUsageDescription = `
+    Ex é o escaninho onde os dados serão salvos.
+    
+    Exemplo:
+    "PGC E15" salvará o valor no escaninho 15.
+  `.trim()
 
-    if (args?.length !== 1) {
-      throw `E${id}: O comando PGC deve receber 1 argumento!`
+  /**
+   * Builds a command.
+   *
+   * @param {SlotIterator} slotIterator
+   * @param {InputIterator} inputIterator
+   * @returns {Command}
+   */
+  build(slotIterator, inputIterator) {
+    const command = new Command()
+
+    command.setAcronym(ReadCommandFactory.commandAcronym)
+
+    const readBaseBehavior = (...args) => {
+      const slotId = numberToSlotId(slotIterator.current())
+
+      if (args.length !== 1) {
+        throw `${slotId}: O comando ${ReadCommandFactory.commandAcronym} deve receber 1 argumento!`
+      }
+
+      const destinySlot = document.getElementById(args[0])
+
+      if (destinySlot === null) {
+        throw `${slotId}: ${args[0]} está errado!`
+      }
+
+      const { value } = inputIterator.next()
+
+      if (value === undefined) {
+        throw `${slotId}: Fim dos dados`
+      }
+
+      destinySlot.value = String(value)
     }
 
-    const destinySlot = document.getElementById(args[0])
-
-    if (destinySlot === null) {
-      throw `E${id}: ${args[0]} está errado!`
+    const readBehavior = (...args) => {
+      try {
+        readBaseBehavior(...args)
+        return 1
+      } catch (err) {
+        showError(err)
+        return 0
+      }
     }
 
-    const { value } = dataIterator.next()
+    command.setBehavior(readBehavior)
 
-    if (value === undefined) {
-      throw `E${id}: Fim dos dados`
-    }
-
-    destinySlot.value = String(value)
+    return command
   }
-
-const readBehavior =
-  (dataIterator) =>
-  (...args) => {
-    try {
-      readBaseBehavior(dataIterator)(...args)
-      return 1
-    } catch (err) {
-      console.error(err)
-      showError(err)
-      return 0
-    }
-  }
-
-export const readCommandFactory = (dataIterator) => {
-  const command = new Command()
-
-  command.setAcronym('PGC')
-
-  command.setBehavior(readBehavior(dataIterator))
-
-  return command
 }

@@ -1,45 +1,31 @@
 import { CommandRuntime } from './CommandRuntime.js'
-import { DataIterator } from './DataIterator.js'
+import { InputIterator } from './InputIterator.js'
 import { numberToSlotId, showError as showErrorBase } from './utils.js'
 import { SlotIterator } from './SlotIterator.js'
 
-import { backCommandFactory } from './commands/back.js'
-import { copyCommand } from './commands/copy.js'
-import { divideCommand } from './commands/divide.js'
-import { ifCommandFactory } from './commands/if.js'
-import { multiplyCommand } from './commands/multiply.js'
-import { printCommand } from './commands/print.js'
-import { readCommandFactory } from './commands/read.js'
-import { stopCommandFactory } from './commands/stop.js'
-import { subtractCommand } from './commands/subtract.js'
-import { sumCommand } from './commands/sum.js'
+import { defaultFactories } from './commands/index.js'
 
-export const showError = showErrorBase;
+export const showError = showErrorBase
 
 const runtimeFactory = (numberOfSlots, data) => {
   const mainIterator = new SlotIterator(numberOfSlots)
-  const dataIterator = new DataIterator(data)
+  const inputIterator = new InputIterator(data)
 
   const commandRuntime = CommandRuntime.getInstance()
 
-  commandRuntime.appendCommand(backCommandFactory(mainIterator))
-  commandRuntime.appendCommand(copyCommand)
-  commandRuntime.appendCommand(divideCommand)
-  commandRuntime.appendCommand(ifCommandFactory(mainIterator))
-  commandRuntime.appendCommand(multiplyCommand)
-  commandRuntime.appendCommand(printCommand)
-  commandRuntime.appendCommand(readCommandFactory(dataIterator))
-  commandRuntime.appendCommand(stopCommandFactory(mainIterator))
-  commandRuntime.appendCommand(subtractCommand)
-  commandRuntime.appendCommand(sumCommand)
+  defaultFactories.forEach((Factory) => {
+    const factory = new Factory()
 
-  return { mainIterator, commandRuntime, dataIterator }
+    commandRuntime.appendCommand(factory.build(mainIterator, inputIterator))
+  })
+
+  return { mainIterator, commandRuntime, inputIterator }
 }
 
 let lastSlotsNumber = 0
 let lastStringifiedData = ''
 let lastIteratorInstance = null
-let lastDataIteratorInstance = null
+let lastInputIteratorInstance = null
 let generatedRuntimeData = null
 
 const memoizedRuntimeFactory = (numberOfSlots, data) => {
@@ -57,7 +43,7 @@ const memoizedRuntimeFactory = (numberOfSlots, data) => {
   lastStringifiedData = JSON.stringify(data)
   generatedRuntimeData = runtimeData
   lastIteratorInstance = runtimeData.mainIterator
-  lastDataIteratorInstance = runtimeData.dataIterator
+  lastInputIteratorInstance = runtimeData.inputIterator
 
   return runtimeData
 }
@@ -88,7 +74,7 @@ export async function run(numberOfSlots, data, speed) {
     let { value } = slotElement
 
     if (!value) {
-      showError(`E${slot}: Escaninho em branco! Use o comando PARE.`)
+      showError(`${slotId}: Escaninho em branco! Use o comando PARE.`)
       break
     }
 
@@ -99,11 +85,27 @@ export async function run(numberOfSlots, data, speed) {
     try {
       commandRuntime.executeCommand(acronym, ...args)
     } catch (err) {
-      showError(`E${slot}: ${err}`)
+      showError(`${slotId}: ${err}`)
     }
 
     // eslint-disable-next-line no-await-in-loop
     await sleep(speed * 1000)
+  }
+}
+
+/**
+ * Clear all slots.
+ *
+ * @param {number} numberOfSlots
+ */
+export const clear = (numberOfSlots) => {
+  const slotIterator = new SlotIterator(numberOfSlots)
+
+  for (const slot of slotIterator) {
+    const slotId = numberToSlotId(slot)
+    const slotElement = document.getElementById(slotId)
+
+    slotElement.value = ''
   }
 }
 
@@ -113,5 +115,5 @@ export const stop = () => {
 
 export const reset = () => {
   lastIteratorInstance?.reset()
-  lastDataIteratorInstance?.reset()
+  lastInputIteratorInstance?.reset()
 }

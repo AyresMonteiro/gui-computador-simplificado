@@ -1,6 +1,5 @@
-export class DataIterator {
+export class InputIterator {
   constructor(data) {
-    console.log({data})
     this.data = data || []
     this.index = 0
   }

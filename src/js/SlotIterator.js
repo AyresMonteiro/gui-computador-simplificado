@@ -20,6 +20,10 @@ export class SlotIterator {
     return this
   }
 
+  current() {
+    return this.currentSlot - 1
+  }
+
   next() {
     if (this.currentSlot > this.numberOfSlots) {
       return { done: true }

@@ -248,7 +248,7 @@ body {
 .logical-container .wrapper {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 80%;
   height: 100%;
   align-items: center;
   justify-content: space-between;
@@ -260,9 +260,7 @@ body {
   font-size: 14pt;
 }
 .logical-container .wrapper .slot-container {
-  width: 100%;
-  max-width: 575px;
-  max-height: 250px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   padding: 20px;

@@ -1,42 +1,70 @@
 import { Command } from '../Command.js'
-import { showError } from '../utils.js'
+import { CommandFactory } from '../CommandFactory.js'
+import { InputIterator } from '../InputIterator.js'
+import { SlotIterator } from '../SlotIterator.js'
+import { numberToSlotId, showError } from '../utils.js'
 
-const backBaseBehavior =
-  (slotIterator) =>
-  (...args) => {
-    if (args.length !== 1) {
-      throw `E${id}: O comando VT deve receber 1 argumento!`
+export class BackCommandFactory extends CommandFactory {
+  static commandAcronym = 'VT'
+  static commandGroup = 'flow'
+  static commandDescription = 'Faz o programa ir à um determinado escaninho.'
+  static commandUsage = ['VT Ex']
+  static commandUsageDescription = `
+    Ex é o escaninho de destino.
+
+    Exemplo:
+    E01 = IMP E16;
+    E02 = VT E01;
+    E16 = 42;
+    
+    O programa acima imprimirá o valor 42 no console repetidamente até que alguém force o programa a parar.
+
+    Isso acontece porque o programa executa o comando IMP E16 armazenado no escaninho 1 e avança para o escaninho 2.
+    O escaninho 2 por sua vez manda o programa voltar para o escaninho 1, reiniciando o ciclo.
+  `.trim()
+
+  /**
+   * Builds a command.
+   *
+   * @param {SlotIterator} slotIterator
+   * @param {InputIterator} _inputIterator
+   * @returns {Command}
+   */
+  build(slotIterator, _inputIterator) {
+    const command = new Command()
+
+    command.setAcronym(BackCommandFactory.commandAcronym)
+
+    const backBaseBehavior = (...args) => {
+      const slotId = numberToSlotId(slotIterator.current())
+
+      if (args.length !== 1) {
+        throw `${slotId}: O comando ${BackCommandFactory.commandAcronym} deve receber 1 argumento!`
+      }
+
+      const slot = document.getElementById(args[0])
+
+      if (slot === null) {
+        throw `${slotId}: ${args[0]} está errado!`
+      }
+
+      const slotNumber = parseInt(args[0].slice(1), 10)
+
+      slotIterator.goTo(slotNumber)
     }
 
-    const slot = document.getElementById(args[0])
-
-    if (slot === null) {
-      throw `E${id}: ${args[0]} está errado!`
+    const backBehavior = (...args) => {
+      try {
+        backBaseBehavior(...args)
+        return 1
+      } catch (err) {
+        showError(err)
+        return 0
+      }
     }
 
-    const slotNumber = parseInt(args[0].slice(1), 10)
+    command.setBehavior(backBehavior)
 
-    slotIterator.goTo(slotNumber)
+    return command
   }
-
-const backBehavior =
-  (slotIterator) =>
-  (...args) => {
-    try {
-      backBaseBehavior(slotIterator)(...args)
-      return 1
-    } catch (err) {
-      showError(err)
-      return 0
-    }
-  }
-
-export const backCommandFactory = (slotIterator) => {
-  const command = new Command()
-
-  command.setAcronym('VT')
-
-  command.setBehavior(backBehavior(slotIterator))
-
-  return command
 }
