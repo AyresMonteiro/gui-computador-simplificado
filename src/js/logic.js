@@ -58,7 +58,9 @@ $('#clear-button').addEventListener('click', () => {
 })
 
 $('#import-button').addEventListener('click', () => {
-  new FileHandler().importCode()
+  new FileHandler().importCode().then((slots) => {
+    if (slots !== numberOfSlots) numberOfSlots = slots
+  })
 })
 
 $('#export-button').addEventListener('click', () => {
