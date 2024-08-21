@@ -1,6 +1,6 @@
 import { run, stop, reset, clear, resizeSlots } from './flow.js'
-import { loadInfoData } from './generateInfo.js'
-import { importCode, exportCode } from './importExportHandler.js'
+import { DocsGenerator } from './DocsGenerator.js'
+import { FileHandler } from './FileHandler.js'
 import {
   openInfo,
   openDataInput,
@@ -10,6 +10,7 @@ import {
   closeCommandsList,
   closeAllInfo,
 } from './otherTabs.js'
+import { defaultFactories } from './commands/index.js'
 
 const $ = document.querySelector.bind(document)
 
@@ -57,11 +58,11 @@ $('#clear-button').addEventListener('click', () => {
 })
 
 $('#import-button').addEventListener('click', () => {
-  importCode(numberOfSlots)
+  new FileHandler().importCode()
 })
 
 $('#export-button').addEventListener('click', () => {
-  exportCode(numberOfSlots)
+  new FileHandler().exportCode(numberOfSlots)
 })
 
 $('#open-data-button').addEventListener('click', openDataInput)
@@ -76,7 +77,7 @@ $('#data-values').addEventListener('change', (e) => {
 
 $('#open-commands-list-button').addEventListener('click', () => {
   if (!isDataLoaded) {
-    loadInfoData()
+    new DocsGenerator().execute(defaultFactories)
     isDataLoaded = true
   }
   openCommandsList()

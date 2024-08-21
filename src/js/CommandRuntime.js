@@ -7,7 +7,7 @@ export class CommandRuntime {
 
   /**
    * Display all commands available in the runtime.
-   * 
+   *
    * @returns {void}
    */
   displayCommands() {
