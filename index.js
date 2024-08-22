@@ -7,11 +7,11 @@ const app = express()
 // allow all files from src
 app.use('/src', express.static('src'))
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
-app.get('/src/css/index.css', (req, res) => {
+app.get('/src/css/index.css', (_req, res) => {
   res.header('Content-Type', 'text/css')
   res.sendFile(
     path.join(__dirname, '/src/css/index.css')

@@ -60,13 +60,19 @@ body {
 }
 .logical-container .data h5 {
   color: #003249;
+  font-size: 20px;
   background-color: #80CED7;
   padding: 20px;
   border-radius: 25px;
   margin: 10px;
 }
+
+.logical-container .data h5 strong {
+  color: #FFFFFF;
+}
+
 .logical-container .data textarea {
-  width: 575px;
+  width: 60%;
   height: 250px;
   display: flex;
   flex-direction: column;

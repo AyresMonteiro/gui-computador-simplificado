@@ -31,8 +31,6 @@ export class DocsGenerator {
       return acc
     }, {})
 
-    console.log(Object.keys(factoryGroups))
-
     const titlesByGroup = {
       data: 'Comandos de manipulação de dados',
       flow: 'Comandos de manipulação de fluxo',
