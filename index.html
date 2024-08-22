@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <title>Computador Simplificado</title>
+    <link
+      rel="stylesheet"
+      id="current-theme"
+    />
     <link rel="stylesheet" href="./src/css/index.css" />
     <link rel="icon" href="./src/assets/favicon.ico" type="image/x-icon" />
   </head>
@@ -39,10 +43,20 @@
       </div>
 
       <div class="wrapper" id="wrapper">
-        <h3>
-          GUI de Computador Simplificado, por
-          <a href="https://github.com/AyresMonteiro">Ayres Monteiro</a>.<br />
-        </h3>
+        <div class="wrapper-header">
+          <h3>
+            GUI de Computador Simplificado, por
+            <a href="https://github.com/AyresMonteiro">Ayres Monteiro</a>.<br />
+          </h3>
+          <!-- Seletor de tema de estilo -->
+          <div class="theme-selector">
+            <label for="theme-selector">Tema:</label>
+            <select id="theme-selector">
+              &nbsp;
+            </select>
+          </div>
+        </div>
+
         <div class="slot-container">
           <div id="generated-slots"></div>
           <div class="slot-bottom-wrapper">
@@ -88,5 +102,6 @@
 
     <!-- <script src="./src/js/navbar.js" type="text/javascript"></script> -->
     <script src="./src/js/logic.js" type="module"></script>
+    <script src="./src/js/theme.js" type="module"></script>
   </body>
 </html>
