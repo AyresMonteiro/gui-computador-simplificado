@@ -11,52 +11,9 @@ body {
   background-color: #007EA7;
 }
 
-.navbar {
-  display: flex;
-  flex-direction: row;
-  height: 20px;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #9AD1D4;
-  box-shadow: 0px 2px 0.5px black;
-}
-.navbar h4 {
-  content: "";
-  width: calc(100% - 40px);
-  height: 100%;
-}
-.navbar .window-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50%;
-  width: 30px;
-  padding-right: 5px;
-}
-.navbar .window-buttons button {
-  height: 100%;
-  width: 30%;
-  padding: 5px;
-  margin: 0px 2px;
-  background-color: #003249;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.1s;
-}
-.navbar .window-buttons button:focus {
-  outline-style: none;
-}
-.navbar .window-buttons #minimize-button:hover {
-  background-color: yellow;
-}
-.navbar .window-buttons #close-button:hover {
-  background-color: red;
-}
-
 .logical-container {
   width: 100%;
-  height: calc(100% - 20px);
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
