@@ -1,31 +1,16 @@
 {
-  "name": "gui-computador-simplificado-electron",
-  "version": "1.0.1",
-  "description": "Uma interface gráfica para exercícios de Computador Simplificado (CS).",
-  "main": "main.js",
-  "author": {
-    "name": "Ayres Monteiro"
-  },
+  "name": "gui-computador-simplificado",
+  "version": "1.0.2",
+  "description": "Uma interface gráfica web para exercícios de Computador Simplificado (CS).",
+  "main": "index.js",
+  "author": "Ayres Monteiro <main@ayresmonteiro.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
     "start": "node index.js"
   },
-  "homepage": "https://github.com/AyresMonteiro/gui-computador-simplificado-electron",
-  "repository": "https://github.com/AyresMonteiro/gui-computador-simplificado-electron",
-  "build": {
-    "appId": "com.electron.simpleCompGUI",
-    "productName": "Computador Simplificado - GUI",
-    "copyright": "Copyright © 2021 Ayres Monteiro",
-    "directories": {
-      "app": ".",
-      "buildResources": "build",
-      "output": "dist"
-    },
-    "win": {
-      "icon": "./src/assets/icon.ico"
-    }
-  },
+  "homepage": "https://github.com/AyresMonteiro/gui-computador-simplificado",
+  "repository": "https://github.com/AyresMonteiro/gui-computador-simplificado",
   "dependencies": {
     "express": "^4.19.2"
   }
