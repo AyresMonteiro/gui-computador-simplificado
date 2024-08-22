@@ -33,35 +33,12 @@
 
       <div id="commands-list-tab">
         <div class="commands-list">
-          <div class="command-list-wrapper">
-            <div class="commands-group">
-              <h4 id="data-commands-controller">
-                Comandos de manipulação de dados
-              </h4>
-              <div class="commands-sublist" id="data-commands">
-                <b id="pgc">PGC</b>
-                <b id="imp">IMP</b>
-                <b id="cop">COP</b>
-                <b id="som">SOM</b>
-                <b id="sub">SUB</b>
-                <b id="mul">MUL</b>
-                <b id="div">DIV</b>
-              </div>
-            </div>
-            <div class="commands-group">
-              <h4 id="flow-commands-controller">
-                Comandos de manipulação de fluxo
-              </h4>
-              <div class="commands-sublist" id="flow-commands">
-                <b id="vt">VT</b>
-                <b id="se">SE</b>
-                <b id="pare">PARE</b>
-              </div>
-            </div>
+          <div class="command-list-wrapper" id="commands-list-sidebar">
+            &nbsp;
           </div>
           <button id="close-commands-list-button">Fechar</button>
         </div>
-        <div class="command-info" id="commands-info-container"></div>
+        <div class="command-info" id="commands-info-container">&nbsp;</div>
       </div>
 
       <div class="console-container" id="console-container">
@@ -70,16 +47,31 @@
       </div>
 
       <div class="wrapper" id="wrapper">
-        <h3>GUI de Computador Simplificado, por <a href="https://github.com/AyresMonteiro">Ayres Monteiro</a>.<br /></h3>
+        <h3>
+          GUI de Computador Simplificado, por
+          <a href="https://github.com/AyresMonteiro">Ayres Monteiro</a>.<br />
+        </h3>
         <div class="slot-container">
           <div id="generated-slots"></div>
           <div class="slot-bottom-wrapper">
             <div class="slots-controller">
               <div class="controller-line">
-                Escaninhos: <input title="Número de escaninhos disponíveis. Caso o número exceda 16, role o painel para baixo." id="slots-input" type="text" value="16" />
+                Escaninhos:
+                <input
+                  title="Número de escaninhos disponíveis. Caso o número exceda 16, role o painel para baixo."
+                  id="slots-input"
+                  type="text"
+                  value="16"
+                />
               </div>
               <div class="controller-line">
-                Velocidade: <input title="Valores disponíveis para unidade de tempo: milissegundos (ms), segundos (s) e minutos (m)." id="speed-input" type="text" value="0.5s" />
+                Velocidade:
+                <input
+                  title="Valores disponíveis para unidade de tempo: milissegundos (ms), segundos (s) e minutos (m)."
+                  id="speed-input"
+                  type="text"
+                  value="0.5s"
+                />
               </div>
             </div>
             <button id="open-commands-list-button">Lista de Comandos</button>

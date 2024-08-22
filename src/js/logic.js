@@ -12,6 +12,8 @@ import {
 } from './otherTabs.js'
 import { defaultFactories } from './commands/index.js'
 
+new DocsGenerator().execute(defaultFactories)
+
 const $ = document.querySelector.bind(document)
 
 let numberOfSlots = 16
@@ -78,10 +80,6 @@ $('#data-values').addEventListener('change', (e) => {
 })
 
 $('#open-commands-list-button').addEventListener('click', () => {
-  if (!isDataLoaded) {
-    new DocsGenerator().execute(defaultFactories)
-    isDataLoaded = true
-  }
   openCommandsList()
   closeAllInfo()
   openInfo('pgc')
