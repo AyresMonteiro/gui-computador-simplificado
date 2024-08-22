@@ -18,7 +18,7 @@ const getTheme = () => {
   return localStorage.getItem(themeKey)
 }
 
-let currentTheme = getTheme()
+let currentTheme = getTheme() || 'blue'
 
 const themeNames = {
   blue: 'Blue',
