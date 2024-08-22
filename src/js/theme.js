@@ -98,3 +98,4 @@ const generateOptions = () => {
 }
 
 generateOptions()
+themeSelector.value = currentTheme
