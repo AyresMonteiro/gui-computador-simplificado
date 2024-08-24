@@ -1,4 +1,4 @@
-:root {
+:root[data-theme="blue"] {
   --darkerColor: #002130;
   --darkColor: #003249;
   --mediumColor: #80ced7;

@@ -1,4 +1,4 @@
-:root {
+:root[data-theme="honeycomb"] {
   --darkerColor: #1e2a38;
   --darkColor: #2c3e50;
   --mediumColor: #ffa600;

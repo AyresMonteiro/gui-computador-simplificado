@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
+@import url('./themes/blue.css');
+@import url('./themes/green.css');
+@import url('./themes/honeycomb.css');
+@import url('./themes/pale.css');
+@import url('./themes/purple.css');
+
 * {
   margin: 0;
   padding: 0;
