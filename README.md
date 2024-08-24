@@ -25,7 +25,13 @@ A aplicação GUI foi criada a partir dos seguintes objetivos:
 
 Instale o NodeJS em https://nodejs.org/pt.
 
-Abra o Powershell e execute o seguinte comando:
+Abra o Powershell e execute o seguinte comando para instalar as dependências:
+
+```shell
+npm i
+```
+
+Depois, inicie o servidor de desenvolvimento com o seguinte comando:
 
 ```shell
 npm run dev
