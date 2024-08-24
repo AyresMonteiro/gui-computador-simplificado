@@ -37,4 +37,4 @@ Depois, inicie o servidor de desenvolvimento com o seguinte comando:
 npm run dev
 ```
 
-Em seguida, abra o navegador e acesse: http://localhost:3000.
+Em seguida, abra o navegador e acesse: http://localhost:5173.
