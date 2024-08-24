@@ -3,7 +3,7 @@ import {
   importAlgorithmFromString,
   resizeSlots,
 } from './flow.js'
-import { showError } from './utils.js'
+import { getIndexFromSlotString, showError } from './utils.js'
 
 export class FileHandler {
   /**
@@ -49,11 +49,14 @@ export class FileHandler {
           }
 
           slotsInputElement.value = lines.length
-          resizeSlots(lines.length)
+
+          const newSize = this.getGreaterSlot(lines)
+
+          resizeSlots(newSize)
 
           importAlgorithmFromString([...lines])
 
-          resolve(lines.length)
+          resolve(newSize)
         } catch (e) {
           reject(e)
         }
@@ -91,5 +94,18 @@ export class FileHandler {
       showError('Erro de Exportação: ${e.message}')
       return
     }
+  }
+
+  /**
+   * Dado um algoritmo {string[]}, retorna o número do maior escaninho.
+   *
+   * @param {string[]} algorithm
+   */
+  getGreaterSlot(algorithm) {
+    let algorithmIndexes = algorithm
+      .map((slot) => getIndexFromSlotString(slot.split(':')[0]))
+      .sort((a, b) => a - b)
+
+    return algorithmIndexes.pop()
   }
 }
