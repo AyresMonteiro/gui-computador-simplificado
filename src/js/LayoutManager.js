@@ -11,8 +11,8 @@ export class LayoutManager {
 
     return `
       <div class="slot">
-        <h5>${slotId}</h5>
-        <input id="${slotId}" />
+        <label for="${slotId}">${slotId}</label>
+        <input id="${slotId}" name="${slotId}" />
       </div>
     `.trim()
   }

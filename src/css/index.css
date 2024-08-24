@@ -256,13 +256,10 @@ body {
   gap: 10px;
 }
 .logical-container .wrapper .title-wrapper p a {
-  color: var(--mediumColor);
+  color: var(--lightColor);
   text-decoration: none;
   font-weight: bolder;
-  transition: 0.5s;
-}
-.logical-container .wrapper .title-wrapper p a:hover {
-  color: var(--lightColor);
+  cursor: pointer;
 }
 .logical-container .wrapper .title-wrapper .wrapper-header {
   display: flex;
@@ -299,18 +296,11 @@ body {
 }
 
 .logical-container .wrapper h3 a {
-  color: var(--mediumColor);
+  color: var(--lightColor);
   text-decoration: none;
   font-weight: bolder;
-
-  /* transition: */
-  transition: 0.5s;
+  cursor: pointer;
 }
-
-.logical-container .wrapper h3 a:hover {
-  color: var(--lightColor);
-}
-
 .logical-container .wrapper .slot-container {
   width: 90%;
   display: flex;
@@ -348,9 +338,13 @@ body {
   background-color: var(--mediumColor);
   align-items: center;
 }
-.logical-container .wrapper .slot-container #generated-slots .line .slot h5 {
+.logical-container .wrapper .slot-container #generated-slots .line .slot label {
   text-align: center;
   padding: 3px;
+  color: var(--darkColor);
+  font-size: 0.83em;
+  font-weight: bold;
+  background-color: var(--mediumColor);
 }
 .logical-container .wrapper .slot-container #generated-slots .line .slot input {
   width: 100%;
