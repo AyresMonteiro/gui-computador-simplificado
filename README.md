@@ -28,7 +28,7 @@ Instale o NodeJS em https://nodejs.org/pt.
 Abra o Powershell e execute o seguinte comando:
 
 ```shell
-npm run start
+npm run dev
 ```
 
 Em seguida, abra o navegador e acesse: http://localhost:3000.
