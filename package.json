@@ -7,11 +7,16 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node index.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "homepage": "https://github.com/AyresMonteiro/gui-computador-simplificado",
   "repository": "https://github.com/AyresMonteiro/gui-computador-simplificado",
   "dependencies": {
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "vite": "^5.4.1"
   }
 }
