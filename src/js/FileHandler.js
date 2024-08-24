@@ -50,7 +50,8 @@ export class FileHandler {
 
           slotsInputElement.value = lines.length
 
-          const newSize = this.getGreaterSlot(lines)
+          const greaterSlot = this.getGreaterSlot(lines)
+          const newSize = greaterSlot < 16 ? 16 : greaterSlot
 
           resizeSlots(newSize)
 
