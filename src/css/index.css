@@ -239,30 +239,44 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-.logical-container .wrapper .wrapper-header {
+.logical-container .wrapper .title-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--lightColor);
   margin-top: 16px;
+  gap: 10px;
+}
+.logical-container .wrapper .title-wrapper p a {
+  color: var(--mediumColor);
+  text-decoration: none;
+  font-weight: bolder;
+  transition: 0.5s;
+}
+.logical-container .wrapper .title-wrapper p a:hover {
+  color: var(--lightColor);
+}
+.logical-container .wrapper .title-wrapper .wrapper-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 10px;
   width: 80%;
-  height: 70px;
 
   color: var(--lightColor);
   text-align: center;
   font-weight: bold;
 }
-.logical-container .wrapper .wrapper-header div {
+.logical-container .wrapper .title-wrapper .wrapper-header div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  width: 25%;
-  height: 30%;
+  gap: 10px;
 }
-.logical-container .wrapper .wrapper-header select {
-  width: 60%;
-  height: 100%;
+.logical-container .wrapper .title-wrapper .wrapper-header select {
   border-radius: 20px;
   border: none;
   background-color: var(--darkColor);
