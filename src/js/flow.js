@@ -157,7 +157,16 @@ export const exportAlgorithmToString = (numberOfSlots) => {
     const slotId = numberToSlotId(slot)
     const slotElement = document.getElementById(slotId)
 
-    algorithm.push(`${slotId}: ${slotElement.value ?? ''}`)
+    if (!slotElement) {
+      showError(`Erro de Exportação: Slot ${slotId} não encontrado!`)
+      continue
+    }
+
+    const isEmpty = !String(slotElement.value).trim()
+
+    if (!isEmpty) {
+      algorithm.push(`${slotId}: ${slotElement.value ?? ''}`)
+    }
   }
 
   return algorithm
