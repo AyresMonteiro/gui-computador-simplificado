@@ -73,10 +73,19 @@ $('#open-data-button').addEventListener('click', openDataInput)
 $('#close-data-button').addEventListener('click', closeDataInput)
 
 $('#data-values').addEventListener('change', (e) => {
-  data = e.target.value
-    .replace(/[^0-9,]*/gu, '')
-    .split(',')
-    .map(Number)
+  const noWhiteSpaces = (string) => string.replace(/\s/gu, '')
+  const onlyCommasNumbersAndHyphens = (string) =>
+    string.replace(/[^0-9,-]*/gu, '')
+  const noHyphensNotFollowedByNumbers = (string) =>
+    string.replace(/(-(?!\d))*/gu, '')
+
+  let value = e.target.value
+
+  value = noWhiteSpaces(value)
+  value = onlyCommasNumbersAndHyphens(value)
+  value = noHyphensNotFollowedByNumbers(value)
+
+  data = value.split(',').map(Number)
 })
 
 $('#open-commands-list-button').addEventListener('click', () => {
