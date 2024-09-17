@@ -288,14 +288,14 @@ body {
   cursor: pointer;
   transition: 0.5s;
 }
-.logical-container .wrapper h3 {
+.logical-container .wrapper h1 {
   color: var(--lightColor);
   text-align: center;
   font-size: 14pt;
   font-weight: bold;
 }
 
-.logical-container .wrapper h3 a {
+.logical-container .wrapper h1 a {
   color: var(--lightColor);
   text-decoration: none;
   font-weight: bolder;
