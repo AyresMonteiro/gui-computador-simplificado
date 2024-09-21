@@ -9,7 +9,7 @@ export class SubtractCommandFactory extends CommandFactory {
   static commandGroup = 'data'
   static commandDescription =
     'Subtrai os dados de um escaninho e armazena a diferença em outro escaninho.'
-  static commandUsage = ['SUB Ex Ey Ez']
+  static commandUsage = ['SUB Ex, Ey, Ez']
   static commandUsageDescription = `
     Ex é o escaninho que possui o minuendo.
     Ey é o escaninho que possui o subtraendo.

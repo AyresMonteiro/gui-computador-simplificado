@@ -9,7 +9,7 @@ export class SumCommandFactory extends CommandFactory {
   static commandGroup = 'data'
   static commandDescription =
     'Soma os dados de dois escaninhos e armazena em um terceiro escaninho.'
-  static commandUsage = ['SOM Ex Ey Ez']
+  static commandUsage = ['SOM Ex, Ey, Ez']
   static commandUsageDescription = `
     Ex é o escaninho que possui a primeira parcela da soma.
     Ey é o escaninho que possui a segunda parcela da soma.

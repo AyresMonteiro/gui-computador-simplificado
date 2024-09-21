@@ -9,7 +9,7 @@ export class DivideCommandFactory extends CommandFactory {
   static commandGroup = 'data'
   static commandDescription =
     'Divide o valor de um escaninho e armazena o quociente em outro escaninho.'
-  static commandUsage = ['DIV Ex Ey Ez']
+  static commandUsage = ['DIV Ex, Ey, Ez']
   static commandUsageDescription = `
     Ex é o escaninho que possui o dividendo.
     Ey é o escaninho que possui o divisor.

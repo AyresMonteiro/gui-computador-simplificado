@@ -1,5 +1,5 @@
 /**
-  @param {String} slotString - A string that represents a slot. I.E: "E01"
+  @param {string} slotString - A string that represents a slot. I.E: "E01"
 
   @returns {Number}
 */
@@ -10,7 +10,7 @@ export const getIndexFromSlotString = (slotString) => {
 /**
  * Function to append error messages to the errors display.
  *
- * @param {String} message - The message
+ * @param {string} message - The message
  */
 export const showError = (message) => {
   let errors = document.getElementById('errors')
@@ -31,7 +31,7 @@ export const scrollElementToBootom = (element) => {
  * Function to convert a number to a slot ID.
  *
  * @param {Number} number - The number to be converted.
- * @returns {String} - The slot ID. I.E: "E01"
+ * @returns {string} - The slot ID. I.E: "E01"
  */
 export const numberToSlotId = (number) => {
   number = typeof number === 'string' ? parseInt(number, 10) : number

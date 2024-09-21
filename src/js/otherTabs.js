@@ -38,7 +38,7 @@ export function closeCommandsList() {
   commandsList.style.display = 'none'
 }
 
-export function displayCommandsSublist(id = String) {
+export function displayCommandsSublist(id) {
   let sublist = document.getElementById(id)
 
   let display = sublist.style.display === 'none' ? 'flex' : 'none'

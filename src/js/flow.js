@@ -81,7 +81,7 @@ export async function run(numberOfSlots, data, speed) {
 
     value = value.toUpperCase()
 
-    let [acronym, ...args] = value.trim().split(' ')
+    let [acronym, ...args] = value.trim().replaceAll(',', '').split(' ')
 
     try {
       commandRuntime.executeCommand(acronym, ...args)

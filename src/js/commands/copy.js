@@ -12,7 +12,7 @@ export class CopyCommandFactory extends CommandFactory {
   }
   static commandGroup = 'data'
   static commandDescription = 'Copia os dados de um escaninho para o outro.'
-  static commandUsage = ['COP Ex Ey', 'CP Ex Ey']
+  static commandUsage = ['COP Ex, Ey', 'CP Ex, Ey']
   static commandUsageDescription = `
     Ex é o escaninho que possui os dados que serão copiados.
     Ey é o escaninho onde os dados serão salvos.

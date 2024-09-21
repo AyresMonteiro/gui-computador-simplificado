@@ -9,7 +9,7 @@ export class MultiplyCommandFactory extends CommandFactory {
   static commandGroup = 'data'
   static commandDescription =
     'Multiplica o valor de dois escaninhos e armazena o produto em um terceiro escaninho.'
-  static commandUsage = ['MUL Ex Ey Ez']
+  static commandUsage = ['MUL Ex, Ey, Ez']
   static commandUsageDescription = `
     Ex é o escaninho que possui o primeiro fator.
     Ey é o escaninho que possui o segundo fator.

@@ -9,7 +9,7 @@ export class IfCommandFactory extends CommandFactory {
   static commandGroup = 'flow'
   static commandDescription =
     'Faz o programa ir à um determinado escaninho caso sua condição seja verdadeira. Caso contrário, ele avançará para o próximo escaninho.'
-  static commandUsage = ['SE Ex < Ey Ez', 'SE Ex > Ey Ez', 'SE Ex = Ey Ez']
+  static commandUsage = ['SE Ex < Ey, Ez', 'SE Ex > Ey, Ez', 'SE Ex = Ey, Ez']
   static commandUsageDescription = `
     Ex é o primeiro escaninho de comparação.
     Ey é o segundo escaninho de comparação.
