@@ -43,12 +43,20 @@ export class DocsGenerator {
             <h4 id="${group}-commands-controller">${titlesByGroup[group]}</h4>
             <div class="commands-sublist" id="${group}-commands">
               ${factories
-                .map(
-                  (Factory) =>
-                    `<b id="${Factory.commandAcronym.toLocaleLowerCase()}">${
-                      Factory.commandAcronym
-                    }</b>`
-                )
+                .map((Factory) => {
+                  const commandNames = Array.from(
+                    new Set(
+                      [
+                        Factory.commandAcronym,
+                        ...Object.keys(Factory.commandAliases ?? {}),
+                      ].sort()
+                    )
+                  )
+
+                  return `<b id="${Factory.commandAcronym.toLocaleLowerCase()}">${commandNames.join(
+                    ' / '
+                  )}</b>`
+                })
                 .join('\n')}
             </div>
           </div>
@@ -73,6 +81,7 @@ export class DocsGenerator {
     const generatedHtml = factories
       .map((Factory) => ({
         acronym: Factory.commandAcronym,
+        aliases: Factory.commandAliases,
         desc: Factory.commandDescription,
         methods: Factory.commandUsage,
         methodsDesc: Factory.commandUsageDescription,
@@ -82,6 +91,14 @@ export class DocsGenerator {
           <div id="${command.acronym.toLocaleLowerCase()}-info">
             <h2>${command.acronym}</h2>
             <p>${command.desc}</p>
+            ${
+              command.aliases === undefined
+                ? ''
+                : `<b>Sinônimos:</b>
+                    ${Object.entries(command.aliases)
+                      .map(([alias, desc]) => `<h4>"${alias}": ${desc}</h4>`)
+                      .join('\n')}`
+            }
             <b>
               ${command.methods.length === 1 ? 'Método' : 'Métodos'} de uso:
             </b>

@@ -6,9 +6,13 @@ import { numberToSlotId, showError } from '../utils.js'
 
 export class BackCommandFactory extends CommandFactory {
   static commandAcronym = 'VT'
+  static commandAliases = {
+    AV: 'Avance para',
+    VT: "Volte para",
+  }
   static commandGroup = 'flow'
   static commandDescription = 'Faz o programa ir à um determinado escaninho.'
-  static commandUsage = ['VT Ex']
+  static commandUsage = ['VT Ex', 'AV Ex']
   static commandUsageDescription = `
     Ex é o escaninho de destino.
 
@@ -34,12 +38,17 @@ export class BackCommandFactory extends CommandFactory {
     const command = new Command()
 
     command.setAcronym(BackCommandFactory.commandAcronym)
+    command.setAliases(BackCommandFactory.commandAliases)
 
     const backBaseBehavior = (...args) => {
       const slotId = numberToSlotId(slotIterator.current())
 
+      const aliases = Object.keys(BackCommandFactory.commandAliases)
+
       if (args.length !== 1) {
-        throw `${slotId}: O comando ${BackCommandFactory.commandAcronym} deve receber 1 argumento!`
+        throw `${slotId}: O comando ${
+          BackCommandFactory.commandAcronym
+        } (ou ${aliases.join(', ')}) deve receber 1 argumento!`
       }
 
       const slot = document.getElementById(args[0])

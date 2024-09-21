@@ -6,9 +6,13 @@ import { getIndexFromSlotString, numberToSlotId, showError } from '../utils.js'
 
 export class CopyCommandFactory extends CommandFactory {
   static commandAcronym = 'COP'
+  static commandAliases = {
+    COP: 'Copiar',
+    CP: 'Copiar, mas escrito com só 2 letras',
+  }
   static commandGroup = 'data'
   static commandDescription = 'Copia os dados de um escaninho para o outro.'
-  static commandUsage = ['COP Ex Ey']
+  static commandUsage = ['COP Ex Ey', 'CP Ex Ey']
   static commandUsageDescription = `
     Ex é o escaninho que possui os dados que serão copiados.
     Ey é o escaninho onde os dados serão salvos.

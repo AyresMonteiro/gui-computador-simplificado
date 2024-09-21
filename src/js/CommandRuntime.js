@@ -26,6 +26,10 @@ export class CommandRuntime {
     }
 
     this.commandMap.set(command.getAcronym(), command)
+
+    for (const alias in command.getAliases()) {
+      this.commandMap.set(alias, command)
+    }
   }
 
   /**

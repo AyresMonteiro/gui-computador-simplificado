@@ -4,21 +4,39 @@ export class Command {
   /**
    * Setter for the acronym property.
    *
-   * @param {String} acronym
+   * @param {string} acronym
    */
   setAcronym(acronym) {
     this.acronym = acronym
 
-    return this;
+    return this
   }
 
   /**
    * Getter for the acronym property.
    *
-   * @returns {String}
+   * @returns {string}
    */
   getAcronym() {
     return this.acronym
+  }
+
+  /**
+   * Setter for the aliases property.
+   *
+   * @param {Record<string, string>} aliases
+   */
+  setAliases(aliases) {
+    this.aliases = aliases
+  }
+
+  /**
+   * Getter for the aliases property.
+   *
+   * @returns {Record<string, string> | undefined}
+   */
+  getAliases() {
+    return this.aliases
   }
 
   /**

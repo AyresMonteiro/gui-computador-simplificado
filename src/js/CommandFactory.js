@@ -11,6 +11,13 @@ export class CommandFactory {
   static commandAcronym = ''
 
   /**
+   * Command aliases.
+   * 
+   * @type {Record<string, string> | undefined}
+   */
+  static commandAliases = undefined
+
+  /**
    * Command Group.
    *
    * @type {string}
