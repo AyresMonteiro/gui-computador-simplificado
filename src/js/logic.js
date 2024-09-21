@@ -1,4 +1,4 @@
-import { run, stop, reset, clear, resizeSlots } from './flow.js'
+import { run, stop, reset, clear, renderSlots } from './flow.js'
 import { DocsGenerator } from './DocsGenerator.js'
 import { FileHandler } from './FileHandler.js'
 import {
@@ -23,7 +23,7 @@ let isDataLoaded = false
 
 $('#slots-input').addEventListener('change', (e) => {
   numberOfSlots = parseInt(e.target.value, 10)
-  resizeSlots(numberOfSlots)
+  renderSlots(numberOfSlots)
 })
 
 $('#speed-input').addEventListener('change', (e) => {
@@ -117,4 +117,4 @@ Array.from($('#flow-commands').children).forEach((element) => {
   })
 })
 
-resizeSlots(numberOfSlots)
+renderSlots(numberOfSlots)
