@@ -2,12 +2,8 @@ import { SlotIterator } from './SlotIterator.js'
 import { numberToSlotId } from './utils.js'
 
 export class LayoutManager {
-  getSlotId(slot) {
-    return numberToSlotId(slot)
-  }
-
   getSlotHtml(id) {
-    const slotId = this.getSlotId(id)
+    const slotId = numberToSlotId(id)
 
     return `
       <div class="slot">
@@ -51,7 +47,7 @@ export class LayoutManager {
     const slotIterator = new SlotIterator(numberOfSlots)
 
     for (let slot of slotIterator) {
-      const slotId = this.getSlotId(slot)
+      const slotId = numberToSlotId(slot)
 
       const slotElement = document.getElementById(slotId)
 

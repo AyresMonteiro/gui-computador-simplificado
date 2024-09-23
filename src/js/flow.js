@@ -148,14 +148,9 @@ export async function run(numberOfSlots, data, speed) {
  * @param {number} numberOfSlots
  */
 export const clear = (numberOfSlots) => {
-  const slotIterator = new SlotIterator(numberOfSlots)
+  const layoutManager = new LayoutManager()
 
-  for (const slot of slotIterator) {
-    const slotId = numberToSlotId(slot)
-    const slotElement = document.getElementById(slotId)
-
-    slotElement.value = ''
-  }
+  layoutManager.clearLayoutValues(numberOfSlots)
 }
 
 /**
