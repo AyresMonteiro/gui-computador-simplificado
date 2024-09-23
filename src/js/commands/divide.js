@@ -19,7 +19,7 @@ export class DivideCommandFactory extends CommandFactory {
     E16 = 17;
     E15 = 3;
 
-    "DIV E16 E15 E14" salvará o valor 5 no escaninho 14.
+    "DIV E16, E15, E14" salvará o valor 5 no escaninho 14.
     Note que o resto da divisão (2, nesse caso) é perdido no processo.
   `.trim()
 

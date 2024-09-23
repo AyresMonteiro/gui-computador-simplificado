@@ -19,7 +19,7 @@ export class SumCommandFactory extends CommandFactory {
     E16 = 2;
     E15 = 3;
     
-    "SOM E16 E15 E16" salvará o valor 5 no escaninho 16.
+    "SOM E16, E15, E16" salvará o valor 5 no escaninho 16.
   `.trim()
 
   /**

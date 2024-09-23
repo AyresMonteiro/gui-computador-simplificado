@@ -20,7 +20,7 @@ export class CopyCommandFactory extends CommandFactory {
     Exemplo:
     E15 = 17;
 
-    "COP E15 E14" salvará o valor 17 no escaninho 14.
+    "COP E15, E14" salvará o valor 17 no escaninho 14.
   `.trim()
 
   /**
@@ -34,12 +34,19 @@ export class CopyCommandFactory extends CommandFactory {
     const command = new Command()
 
     command.setAcronym(CopyCommandFactory.commandAcronym)
+    command.setAliases(CopyCommandFactory.commandAliases)
 
     const copyBaseBehavior = (...args) => {
       const slotId = numberToSlotId(slotIterator.current())
 
+      const aliases = Object.keys(CopyCommandFactory.commandAliases).filter(
+        (key) => key !== CopyCommandFactory.commandAcronym
+      )
+
       if (args.length !== 2) {
-        throw `${slotId}: O comando ${CopyCommandFactory.commandAcronym} deve receber 2 argumentos!`
+        throw `${slotId}: O comando ${
+          CopyCommandFactory.commandAcronym
+        } (ou ${aliases.join(', ')}) deve receber 2 argumentos!`
       }
 
       const originSlotIdx = getIndexFromSlotString(args[0])

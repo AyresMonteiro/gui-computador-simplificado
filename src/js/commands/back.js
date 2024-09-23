@@ -8,7 +8,7 @@ export class BackCommandFactory extends CommandFactory {
   static commandAcronym = 'VT'
   static commandAliases = {
     AV: 'Avance para',
-    VT: "Volte para",
+    VT: 'Volte para',
   }
   static commandGroup = 'flow'
   static commandDescription = 'Faz o programa ir à um determinado escaninho.'
@@ -43,7 +43,9 @@ export class BackCommandFactory extends CommandFactory {
     const backBaseBehavior = (...args) => {
       const slotId = numberToSlotId(slotIterator.current())
 
-      const aliases = Object.keys(BackCommandFactory.commandAliases)
+      const aliases = Object.keys(BackCommandFactory.commandAliases).filter(
+        (key) => key !== BackCommandFactory.commandAcronym
+      )
 
       if (args.length !== 1) {
         throw `${slotId}: O comando ${

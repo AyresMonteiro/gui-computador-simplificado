@@ -19,7 +19,7 @@ export class SubtractCommandFactory extends CommandFactory {
     E16 = 2;
     E15 = 3;
     
-    "SUB E16 E15 E15" salvará o valor -1 no escaninho 15.
+    "SUB E16, E15, E15" salvará o valor -1 no escaninho 15.
   `.trim()
 
   /**

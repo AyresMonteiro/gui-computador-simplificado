@@ -23,9 +23,9 @@ export class IfCommandFactory extends CommandFactory {
     E10 = 8;
     E11 = 9;
 
-    Caso o escaninho 2 possua o comando "SE E10 < E09 E01", o computador simplificado analisará se E10 é menor que E09 e então confirmará que não e ao invés de ir para E01, avançará para o próximo escaninho, que nesse caso é E03.
+    Caso o escaninho 2 possua o comando "SE E10 < E09, E01", o computador simplificado analisará se E10 é menor que E09 e então confirmará que não e ao invés de ir para E01, avançará para o próximo escaninho, que nesse caso é E03.
 
-    Caso o escaninho 2 possua o comando "SE E10 < E11 E01", o computador simplificado analisará se E10 é menor que E1 e então confirmará que sim e irá para E01, repetindo infinitamente.
+    Caso o escaninho 2 possua o comando "SE E10 < E11, E01", o computador simplificado analisará se E10 é menor que E1 e então confirmará que sim e irá para E01, repetindo infinitamente.
   `.trim()
 
   /**

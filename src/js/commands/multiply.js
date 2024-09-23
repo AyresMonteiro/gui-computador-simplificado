@@ -19,7 +19,7 @@ export class MultiplyCommandFactory extends CommandFactory {
     E16 = 8;
     E15 = 5;
     
-    "MUL E16 E15 E14" salvará o valor 40 no escaninho 14.
+    "MUL E16, E15, E14" salvará o valor 40 no escaninho 14.
   `.trim()
 
   /**
