@@ -8,14 +8,8 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/ico" />
 
     <!-- Tags SEO para a Engine do Google -->
-    <meta
-      name="description"
-      content="%VITE_META_DESCRIPTION%"
-    />
-    <meta
-      name="keywords"
-      content="%VITE_META_TAGS%"
-    />
+    <meta name="description" content="%VITE_META_DESCRIPTION%" />
+    <meta name="keywords" content="%VITE_META_TAGS%" />
     <meta name="author" content="Ayres Monteiro" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
@@ -24,10 +18,7 @@
     <meta property="og:url" content="https://computadorsimplificado.online" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="%VITE_META_TITLE%" />
-    <meta
-      property="og:description"
-      content="%VITE_META_DESCRIPTION%"
-    />
+    <meta property="og:description" content="%VITE_META_DESCRIPTION%" />
     <meta
       property="og:image"
       content="https://computadorsimplificado.online/og_image.png"
@@ -116,7 +107,15 @@
                 />
               </div>
             </div>
-            <button id="open-commands-list-button">Lista de Comandos</button>
+            <div class="docs-buttons">
+              <a
+                href="http://algol.dcc.ufla.br/~monserrat/icc/Computador_simplificado.html"
+                target="_blank"
+              >
+                <button id="article-reference-button">Material de Apoio</button>
+              </a>
+              <button id="open-commands-list-button">Lista de Comandos</button>
+            </div>
             <button id="open-data-button">Carregar dados de entrada</button>
             <div class="file-controller">
               <button id="import-button">Importar</button>

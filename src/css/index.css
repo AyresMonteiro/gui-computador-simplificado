@@ -398,6 +398,33 @@ body {
   width: 10%;
   padding: 5px;
 }
+
+.logical-container .wrapper .slot-bottom-wrapper .docs-buttons {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.logical-container .wrapper .slot-bottom-wrapper .docs-buttons button {
+  text-align: center;
+  padding: 0;
+}
+
+.logical-container .wrapper .slot-bottom-wrapper .docs-buttons a > button {
+  width: 100%;
+  height: 100%;
+}
+
+.logical-container .wrapper .slot-bottom-wrapper .docs-buttons a,
+.logical-container .wrapper .slot-bottom-wrapper .docs-buttons > button {
+  width: 100%;
+  height: 40%;
+}
+
 .logical-container .wrapper .slot-bottom-wrapper .file-controller,
 .logical-container .wrapper .slot-bottom-wrapper .flow-controller {
   display: flex;

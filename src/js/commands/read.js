@@ -7,9 +7,13 @@ import { numberToSlotId, showError } from '../utils.js'
 export class ReadCommandFactory extends CommandFactory {
   static commandAcronym = 'PGC'
   static commandGroup = 'data'
+  static commandAliases = {
+    LG: 'Leia e Guarde cartão',
+    PGC: 'Pegue e Guarde Cartão',
+  }
   static commandDescription =
     'Lê o próximo valor inserido pelo usuário. (Dados de entrada)'
-  static commandUsage = ['PGC Ex']
+  static commandUsage = ['PGC Ex', 'LG Ex']
   static commandUsageDescription = `
     Ex é o escaninho onde os dados serão salvos.
     
@@ -28,12 +32,19 @@ export class ReadCommandFactory extends CommandFactory {
     const command = new Command()
 
     command.setAcronym(ReadCommandFactory.commandAcronym)
+    command.setAliases(ReadCommandFactory.commandAliases)
 
     const readBaseBehavior = (...args) => {
       const slotId = numberToSlotId(slotIterator.current())
 
+      const aliases = Object.keys(ReadCommandFactory.commandAliases).filter(
+        (key) => key !== ReadCommandFactory.commandAcronym
+      )
+
       if (args.length !== 1) {
-        throw `${slotId}: O comando ${ReadCommandFactory.commandAcronym} deve receber 1 argumento!`
+        throw `${slotId}: O comando ${
+          ReadCommandFactory.commandAcronym
+        } (ou ${aliases.join(', ')}) deve receber 1 argumento!`
       }
 
       const destinySlot = document.getElementById(args[0])

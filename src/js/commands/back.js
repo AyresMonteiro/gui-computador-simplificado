@@ -9,10 +9,11 @@ export class BackCommandFactory extends CommandFactory {
   static commandAliases = {
     AV: 'Avance para',
     VT: 'Volte para',
+    VÁ: 'Vá para',
   }
   static commandGroup = 'flow'
   static commandDescription = 'Faz o programa ir à um determinado escaninho.'
-  static commandUsage = ['VT Ex', 'AV Ex']
+  static commandUsage = ['VT Ex', 'AV Ex', 'VÁ Ex']
   static commandUsageDescription = `
     Ex é o escaninho de destino.
 
