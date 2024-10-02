@@ -38,3 +38,10 @@ npm run dev
 ```
 
 Em seguida, abra o navegador e acesse: http://localhost:5173.
+
+
+## Contribuidores
+
+**Prof. Maicon Stihler** – Responsável por indicar a adição de material de referencial teórico e corrigir termos técnicos.
+
+**Ayres Monteiro** – Mantenedor principal do projeto.
